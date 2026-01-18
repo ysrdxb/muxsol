@@ -25,8 +25,10 @@
         <div class="row g-5 mb-5">
             <!-- Brand Column -->
             <div class="col-lg-4">
-                <div style="font-family: var(--font-mono); font-weight: 900; font-size: 1.25rem; letter-spacing: 0.15em; color: white; margin-bottom: 20px;">
-                    {{ strtoupper($siteName) }}
+                <div style="margin-bottom: 25px;">
+                    <a class="logo-dot-matrix" href="{{ url('/') }}" style="font-size: 2rem; letter-spacing: 0.1em;">
+                        <span class="mux">MUX</span><span class="sol">SOL</span>
+                    </a>
                 </div>
                 <p style="color: var(--text-muted); max-width: 280px; font-size: 0.9rem; line-height: 1.7;">
                     {{ $siteDescription }}

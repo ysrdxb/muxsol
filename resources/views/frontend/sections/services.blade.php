@@ -46,14 +46,14 @@
                     <div class="{{ $cardClass }} h-100 p-4">
                         <span class="serial-tag">[ {{ $id }} ]</span>
                         
-                        <!-- Icon -->
+                        <!-- Icon with Industrial Glow -->
                         <div class="d-flex align-items-center justify-content-center mb-4" 
-                             style="width: 56px; height: 56px; border: 2px solid var(--border-dark);">
-                            <i class="{{ $icon }}" style="font-size: 1.25rem; color: {{ $accentColor }};"></i>
+                             style="width: 64px; height: 64px; border: 1px solid {{ $accentColor }}; background: rgba(0,0,0,0.2); box-shadow: 0 0 15px {{ $accentColor }}33;">
+                            <i class="bi {{ $icon }}" style="font-size: 1.75rem; color: {{ $accentColor }}; text-shadow: 0 0 10px {{ $accentColor }}66;"></i>
                         </div>
 
                         <!-- Title -->
-                        <h5 class="text-white fw-bold mb-3" style="text-transform: uppercase; letter-spacing: 0.05em;">
+                        <h5 class="text-white fw-bold mb-3" style="text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-mono);">
                             {{ $title }}
                         </h5>
 

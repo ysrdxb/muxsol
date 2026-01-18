@@ -205,6 +205,47 @@
             background: var(--midnight);
             color: var(--text-primary);
         }
+
+        /* DOT-MATRIX LOGO UTILITY */
+        .logo-dot-matrix {
+            font-family: var(--font-mono);
+            font-weight: 800; /* Slightly lighter than 900 for better legibility with masks */
+            display: inline-flex;
+            gap: 2px;
+            text-decoration: none !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.05em;
+        }
+        .logo-dot-matrix .mux, .logo-dot-matrix .sol {
+            mask-image: radial-gradient(circle at center, black 1px, transparent 1.2px);
+            -webkit-mask-image: radial-gradient(circle at center, black 1px, transparent 1.2px);
+            mask-size: 3px 3px;
+            -webkit-mask-size: 3px 3px;
+            transition: all 0.4s ease;
+        }
+        .logo-dot-matrix .mux {
+            color: var(--neon-blue);
+        }
+        .logo-dot-matrix .sol {
+            color: var(--neon-green);
+        }
+        
+        /* 'Enlightened' Hover State */
+        .logo-dot-matrix:hover {
+            transform: scale(1.05);
+        }
+        .logo-dot-matrix:hover .mux, .logo-dot-matrix:hover .sol {
+            mask-image: none;
+            -webkit-mask-image: none;
+        }
+        .logo-dot-matrix:hover .mux {
+            color: #4D9FFF;
+            text-shadow: 0 0 20px rgba(0, 107, 255, 1), 0 0 40px rgba(0, 107, 255, 0.5);
+        }
+        .logo-dot-matrix:hover .sol {
+            color: #50FFB0;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 1), 0 0 40px rgba(0, 255, 136, 0.5);
+        }
     </style>
 
     @livewireStyles

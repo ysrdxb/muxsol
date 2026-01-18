@@ -43,7 +43,7 @@
                         
                         <!-- Visual Header -->
                         <div class="p-4 text-center" style="background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border-dark);">
-                            <i class="{{ $icon }}" style="font-size: 2.5rem; color: {{ $accentColor }};"></i>
+                            <i class="bi {{ $icon }}" style="font-size: 2.5rem; color: {{ $accentColor }};"></i>
                         </div>
 
                         <!-- Content -->

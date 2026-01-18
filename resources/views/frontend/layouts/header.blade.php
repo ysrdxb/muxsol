@@ -12,9 +12,9 @@
 <!-- Industrial Header - solid #08101d on scroll or clean industrial -->
 <nav class="navbar navbar-expand-lg fixed-top main-header" style="background: #08101d; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 0; transition: all 0.3s ease;">
     <div class="container">
-        <!-- Logo - Blocky Industrial -->
-        <a class="navbar-brand" href="{{ url('/') }}" style="font-family: var(--font-mono); font-weight: 900; font-size: 1.4rem; letter-spacing: 0.15em; color: white; text-decoration: none;">
-            {{ strtoupper($siteName) }}<span style="color: var(--neon-blue);">.</span>SYS
+        <!-- Logo - Dot Matrix Technique (Increased Size) -->
+        <a class="logo-dot-matrix" href="{{ url('/') }}" style="font-size: 1.8rem; letter-spacing: 0.1em;">
+            <span class="mux">MUX</span><span class="sol">SOL</span>
         </a>
 
         <!-- Mobile Toggle - Terminal Style -->
