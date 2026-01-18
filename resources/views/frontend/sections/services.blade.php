@@ -39,7 +39,7 @@
                     $id = $service['id'] ?? 'SVC-0'.($index+1);
                     $isGreen = $index % 2 === 1;
                     $cardClass = $isGreen ? 'card-retro-green' : 'card-retro';
-                    $accentColor = $isGreen ? 'var(--neon-green)' : 'var(--neon-blue)';
+                    $accentColor = $isGreen ? '#00FF88' : '#006BFF';
                 @endphp
                 
                 <div class="col-md-6 col-lg-4">
