@@ -1,352 +1,401 @@
 @php
-    $heading = $content['heading'] ?? $section->title;
-    $subheading = $content['subheading'] ?? $section->subtitle;
-    $description = $content['description'] ?? '';
-    $primaryButtonText = $content['primary_button_text'] ?? '';
-    $primaryButtonUrl = $content['primary_button_url'] ?? '';
-    $secondaryButtonText = $content['secondary_button_text'] ?? '';
-    $secondaryButtonUrl = $content['secondary_button_url'] ?? '';
-    $backgroundImage = $content['background_image'] ?? null;
-    $style = $settings['style'] ?? 'centered';
-    $backgroundType = $settings['background_type'] ?? 'gradient';
+    $siteName = \App\Models\Setting::get('general.site_name', config('app.name'));
 @endphp
 
-<section class="hero-section relative overflow-hidden">
-    <!-- Sophisticated Background -->
-    @if($backgroundImage)
-        <div class="absolute inset-0 z-0">
-            <img src="{{ asset('storage/' . $backgroundImage) }}" alt="" class="h-full w-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-b from-[var(--gray-950)]/80 via-[var(--gray-950)]/70 to-[var(--gray-950)]/90"></div>
-        </div>
-    @elseif($backgroundType === 'gradient')
-        <div class="hero-gradient-bg">
-            <!-- Ambient gradient orbs -->
-            <div class="hero-orb hero-orb-1"></div>
-            <div class="hero-orb hero-orb-2"></div>
-            <div class="hero-orb hero-orb-3"></div>
-            <!-- Subtle grid pattern -->
-            <div class="hero-grid"></div>
-        </div>
-    @else
-        <div class="absolute inset-0 bg-white"></div>
-    @endif
+<!-- Hero Section - Vintage Industrial Mainframe -->
+<section class="hero-mainframe position-relative overflow-hidden">
+    
+    <!-- CRT & Terminal Grid Overlays -->
+    <div class="crt-scanlines"></div>
+    <div class="terminal-grid"></div>
 
-    <!-- Content -->
-    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="hero-content {{ $style === 'centered' ? 'text-center mx-auto' : 'text-left' }}">
-            <!-- Badge/Tag -->
-            @if($subheading)
-                <div class="hero-badge animate-fade-in-up">
-                    <span class="hero-badge-dot"></span>
-                    {{ $subheading }}
+    <!-- Hardware LED Indicators (Top Left) -->
+    <div class="hardware-leds">
+        <div class="led led-green blinking"></div>
+        <div class="led led-yellow"></div>
+        <div class="led led-red"></div>
+    </div>
+
+    <!-- HUD Coordinate Markers -->
+    <div class="position-absolute top-0 end-0 p-4 mono-label hud-text" style="z-index: 50; opacity: 0.3;">
+        [ POS_IDX: 64.126 / 21.817 ]
+    </div>
+
+    <div class="container position-relative py-5" style="z-index: 30; margin-top: 60px;">
+        <div class="row align-items-center">
+            
+            <!-- Left Side: Control & Logic -->
+            <div class="col-lg-7">
+                
+                <!-- Status Bracket -->
+                <div class="mono-label mb-4" style="color: var(--neon-blue); font-size: 11px; letter-spacing: 0.2em;">
+                    [ SYSTEM_STATUS: INITIALIZING_CORE ]
                 </div>
-            @endif
 
-            <!-- Main Headline -->
-            <h1 class="hero-headline animate-fade-in-up delay-100 {{ $backgroundImage ? 'text-white' : '' }}">
-                {!! nl2br(e($heading)) !!}
-            </h1>
+                <!-- Main Industrial Headline -->
+                <div class="mb-4">
+                    <h1 class="display-2 fw-black text-white m-0" style="letter-spacing: -0.04em; line-height: 0.9;">
+                        WE <span class="action-glitch-box">BUILD</span>
+                    </h1>
+                </div>
 
-            <!-- Description -->
-            @if($description)
-                <p class="hero-description animate-fade-in-up delay-200 {{ $backgroundImage ? 'text-[var(--gray-300)]' : '' }} {{ $style === 'centered' ? 'mx-auto' : '' }}">
-                    {{ $description }}
+                <!-- Rotating Sub-text -->
+                <div class="typewriter-container mb-5">
+                    <h2 class="mono-text" style="color: var(--text-muted); font-size: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase;">
+                        [ <span id="target-phrase">DIGITAL SYSTEMS</span> ]<span class="terminal-block-cursor"></span>
+                    </h2>
+                </div>
+
+                <!-- Heavy Description -->
+                <p class="mb-5 industrial-desc">
+                    Architecting high-performance digital ecosystems. We engineer scalable software, AI automation, and enterprise solutions for the modern industrial age.
                 </p>
-            @endif
 
-            <!-- CTA Buttons -->
-            @if($primaryButtonText || $secondaryButtonText)
-                <div class="hero-actions animate-fade-in-up delay-300 {{ $style === 'centered' ? 'justify-center' : 'justify-start' }}">
-                    @if($primaryButtonText)
-                        <a href="{{ $primaryButtonUrl }}" class="hero-btn-primary group">
-                            {{ $primaryButtonText }}
-                            <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <!-- Physical Buttons -->
+                <div class="d-flex flex-wrap gap-4 mt-2">
+                    <a href="#contact" class="btn-physical-click">
+                        INIT_PROJECT
+                    </a>
+                    <a href="#portfolio" class="btn-physical-click-outline">
+                        VIEW_SYSTEMS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side: Data-Visualization HUD -->
+            <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="hud-dashboard">
+                    
+                    <!-- Box 1: Scrolling Code Log -->
+                    <div class="hud-box">
+                        <div class="hud-box-header">LOGS.EXE</div>
+                        <div class="hud-box-content code-scroll-wrap">
+                            <div class="scrolling-code">
+                                > INITIALIZING_KERNEL...<br>
+                                > LOADING_SYSTEM_RESOURCES...<br>
+                                > CONNECTING_NODE_01... [OK]<br>
+                                > ESTABLISHING_ENCRYPTION...<br>
+                                > MUXSOL_SYSTEM_VINTAGE_CORE: v8.0.2<br>
+                                > CHECKING_DATALAKES... [STABLE]<br>
+                                > READY_FOR_INSTRUCTIONS_<br>
+                                > BOOT_SEQ_COMPLETE<br>
+                                > MONITORING_ACTIVE_CHANNELS...<br>
+                                > OPTIMIZING_WORKFLOWS...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Box 2: SVG Oscilloscope -->
+                    <div class="hud-box">
+                        <div class="hud-box-header">OSCILLOSCOPE.SYS</div>
+                        <div class="hud-box-content d-flex align-items-center justify-content-center p-0" style="height: 100px;">
+                            <svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none">
+                                <path d="M0 30 Q 10 10, 20 30 T 40 30 T 60 30 T 80 30 T 100 30 T 120 30 T 140 30 T 160 30 T 180 30 T 200 30" 
+                                      stroke="#00FF88" stroke-width="2" fill="none" class="waveform-anim"></path>
                             </svg>
-                        </a>
-                    @endif
+                        </div>
+                    </div>
 
-                    @if($secondaryButtonText)
-                        <a href="{{ $secondaryButtonUrl }}" class="hero-btn-secondary {{ $backgroundImage ? 'hero-btn-secondary-dark' : '' }}">
-                            {{ $secondaryButtonText }}
-                        </a>
-                    @endif
-                </div>
-            @endif
+                    <!-- Box 3: Active Nodes Map -->
+                    <div class="hud-box">
+                        <div class="hud-box-header">NODE_MAP.NDX</div>
+                        <div class="hud-box-content node-map-grid p-3">
+                            <div class="dot-matrix-map">
+                                <!-- Generated map dots -->
+                                @for($i=0; $i<64; $i++)
+                                    <div class="map-dot {{ rand(0, 10) > 8 ? 'active' : '' }}"></div>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Trust indicators (optional) -->
-            <div class="hero-trust animate-fade-in-up delay-400 {{ $style === 'centered' ? 'justify-center' : 'justify-start' }}">
-                <div class="hero-trust-item">
-                    <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="{{ $backgroundImage ? 'text-[var(--gray-400)]' : 'text-[var(--gray-500)]' }}">No setup required</span>
-                </div>
-                <div class="hero-trust-item">
-                    <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="{{ $backgroundImage ? 'text-[var(--gray-400)]' : 'text-[var(--gray-500)]' }}">Free consultation</span>
-                </div>
-                <div class="hero-trust-item">
-                    <svg class="w-4 h-4 text-[var(--success)]" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="{{ $backgroundImage ? 'text-[var(--gray-400)]' : 'text-[var(--gray-500)]' }}">Cancel anytime</span>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Bottom Stats Bar -->
+    <div class="position-absolute bottom-0 w-100 py-3" style="background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.05); z-index: 30;">
+        <div class="container d-flex justify-content-between mono-text" style="font-size: 10px; color: #64748B;">
+            <div>[ UPTIME: 99.98% ]</div>
+            <div>[ SYS_CLOCK: {{ now()->format('H:i:s') }} ]</div>
+            <div>[ REGION: EU_NORTH_01 ]</div>
+        </div>
+    </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const targets = [
+        'DIGITAL SYSTEMS',
+        'AI SOLUTIONS',
+        'SAAS PLATFORMS',
+        'MOBILE APPS',
+        'WORKFLOWS'
+    ];
+    
+    let currentIndex = 0;
+    const targetPhrase = document.getElementById('target-phrase');
+
+    function typeEffect(element, text, callback) {
+        let i = 0;
+        element.textContent = '';
+        const interval = setInterval(() => {
+            element.textContent += text.charAt(i);
+            i++;
+            if (i >= text.length) {
+                clearInterval(interval);
+                setTimeout(callback, 2000); // Wait on screen
+            }
+        }, 80);
+    }
+
+    function deleteEffect(element, callback) {
+        let text = element.textContent;
+        const interval = setInterval(() => {
+            text = text.slice(0, -1);
+            element.textContent = text;
+            if (text.length === 0) {
+                clearInterval(interval);
+                callback();
+            }
+        }, 50);
+    }
+
+    function rotateLoop() {
+        typeEffect(targetPhrase, targets[currentIndex], () => {
+            deleteEffect(targetPhrase, () => {
+                currentIndex = (currentIndex + 1) % targets.length;
+                rotateLoop();
+            });
+        });
+    }
+
+    rotateLoop();
+
+    // Randomize Dot Map
+    setInterval(() => {
+        const dots = document.querySelectorAll('.map-dot');
+        dots.forEach(dot => {
+            if (Math.random() > 0.95) {
+                dot.classList.toggle('active');
+            }
+        });
+    }, 1000);
+});
+</script>
+
 <style>
-    /* Hero Section Base */
-    .hero-section {
-        min-height: 85vh;
+    /* 1. Mainframe Layout */
+    .hero-mainframe {
+        background-color: #030712;
+        min-height: 100vh;
         display: flex;
         align-items: center;
-        padding: 120px 0 140px;
+        color: white;
     }
 
-    /* Gradient Background */
-    .hero-gradient-bg {
+    /* CRT Scanlines Layer */
+    .crt-scanlines {
         position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, var(--gray-50) 0%, white 50%, var(--gray-50) 100%);
-        overflow: hidden;
-    }
-
-    /* Ambient gradient orbs */
-    .hero-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.5;
-        animation: float-orb 20s ease-in-out infinite;
-    }
-
-    .hero-orb-1 {
-        top: -10%;
-        left: 10%;
-        width: 500px;
-        height: 500px;
-        background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-300) 100%);
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 100;
         opacity: 0.15;
-        animation-delay: 0s;
     }
 
-    .hero-orb-2 {
-        bottom: -20%;
-        right: 5%;
-        width: 600px;
-        height: 600px;
-        background: linear-gradient(135deg, var(--brand-accent) 0%, var(--brand-400) 100%);
-        opacity: 0.12;
-        animation-delay: -7s;
-    }
-
-    .hero-orb-3 {
-        top: 30%;
-        right: 30%;
-        width: 400px;
-        height: 400px;
-        background: linear-gradient(135deg, var(--brand-secondary) 0%, var(--success) 100%);
-        opacity: 0.08;
-        animation-delay: -14s;
-    }
-
-    @keyframes float-orb {
-        0%, 100% {
-            transform: translate(0, 0) scale(1);
-        }
-        25% {
-            transform: translate(30px, -20px) scale(1.05);
-        }
-        50% {
-            transform: translate(-20px, 30px) scale(0.95);
-        }
-        75% {
-            transform: translate(-30px, -10px) scale(1.02);
-        }
-    }
-
-    /* Subtle grid pattern */
-    .hero-grid {
+    /* Terminal Grid Layer (+) */
+    .terminal-grid {
         position: absolute;
-        inset: 0;
-        background-image:
-            linear-gradient(var(--gray-200) 1px, transparent 1px),
-            linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
-        background-size: 60px 60px;
-        opacity: 0.3;
-        mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
-        -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: 
+            radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 5;
     }
 
-    /* Content container */
-    .hero-content {
-        max-width: 900px;
+    /* 2. Redesign Headline */
+    .fw-black { font-weight: 900; }
+    .mono-text { font-family: 'JetBrains Mono', monospace; }
+
+    .action-glitch-box {
+        display: inline-block;
+        background-color: #006BFF;
+        color: white;
+        padding: 4px 20px;
+        margin-left: 10px;
+        animation: glitch-flicker 4s infinite;
+        position: relative;
     }
 
-    /* Badge */
-    .hero-badge {
-        display: inline-flex;
-        align-items: center;
+    @keyframes glitch-flicker {
+        0%, 100% { opacity: 1; }
+        92% { opacity: 1; transform: skew(0); }
+        93% { opacity: 0.8; transform: skew(2deg); }
+        94% { opacity: 1; transform: skew(0); }
+        95% { opacity: 0.9; transform: translateX(2px); }
+        96% { opacity: 1; transform: translateX(0); }
+    }
+
+    .terminal-block-cursor {
+        display: inline-block;
+        width: 12px;
+        height: 24px;
+        background-color: var(--neon-blue);
+        margin-left: 8px;
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .industrial-desc {
+        max-width: 550px;
+        color: #94A3B8;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        font-family: 'JetBrains Mono', monospace;
+        opacity: 0.8;
+    }
+
+    /* 3. Right-Side HUD DASHBOARD */
+    .hud-dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .hud-box {
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.02);
+        position: relative;
+    }
+
+    .hud-box-header {
+        background: rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding: 4px 12px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 9px;
+        color: #64748B;
+        letter-spacing: 0.1em;
+    }
+
+    /* Box 1: Code Scroll */
+    .code-scroll-wrap {
+        height: 120px;
+        overflow: hidden;
+        padding: 15px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        color: #00FF88;
+        line-height: 1.5;
+    }
+
+    .scrolling-code {
+        animation: scrollText 15s linear infinite;
+    }
+
+    @keyframes scrollText {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-100%); }
+    }
+
+    /* Box 2: Waveform */
+    .waveform-anim {
+        stroke-dasharray: 200;
+        animation: dash 10s linear infinite;
+    }
+    @keyframes dash {
+        to { stroke-dashoffset: -400; }
+    }
+
+    /* Box 3: Node Map */
+    .dot-matrix-map {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
         gap: 8px;
-        padding: 6px 14px 6px 10px;
-        font-size: 0.8125rem;
-        font-weight: 500;
-        color: var(--brand-600);
-        background-color: var(--brand-50);
-        border: 1px solid var(--brand-100);
-        border-radius: var(--radius-full);
-        margin-bottom: 24px;
+        justify-items: center;
     }
-
-    .hero-badge-dot {
-        width: 6px;
-        height: 6px;
-        background-color: var(--brand-primary);
+    .map-dot {
+        width: 4px;
+        height: 4px;
+        background: rgba(255,255,255,0.1);
         border-radius: 50%;
-        animation: pulse-dot 2s ease-in-out infinite;
+        transition: all 0.3s;
+    }
+    .map-dot.active {
+        background: var(--neon-blue);
+        box-shadow: 0 0 10px var(--neon-blue);
     }
 
-    @keyframes pulse-dot {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    /* Headline */
-    .hero-headline {
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        font-weight: 700;
-        line-height: 1.1;
-        letter-spacing: -0.025em;
-        color: var(--gray-900);
-        margin-bottom: 24px;
-    }
-
-    /* Description */
-    .hero-description {
-        font-size: 1.125rem;
-        line-height: 1.7;
-        color: var(--gray-600);
-        max-width: 640px;
-        margin-bottom: 40px;
-    }
-
-    /* Action buttons container */
-    .hero-actions {
+    /* 4. Physical Accents */
+    .hardware-leds {
+        position: absolute;
+        top: 20px;
+        left: 20px;
         display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-bottom: 48px;
-    }
-
-    /* Primary button */
-    .hero-btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 14px 28px;
-        font-size: 0.9375rem;
-        font-weight: 600;
-        color: white;
-        background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-600) 100%);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: all var(--duration-normal) var(--ease-out);
-    }
-
-    .hero-btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35), 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-btn-primary:active {
-        transform: translateY(0);
-    }
-
-    /* Secondary button */
-    .hero-btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 14px 28px;
-        font-size: 0.9375rem;
-        font-weight: 600;
-        color: var(--gray-700);
-        background-color: white;
-        border: 1px solid var(--gray-200);
-        border-radius: var(--radius-lg);
-        transition: all var(--duration-normal) var(--ease-out);
-    }
-
-    .hero-btn-secondary:hover {
-        background-color: var(--gray-50);
-        border-color: var(--gray-300);
-    }
-
-    .hero-btn-secondary-dark {
-        color: white;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(8px);
-    }
-
-    .hero-btn-secondary-dark:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Trust indicators */
-    .hero-trust {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-    }
-
-    .hero-trust-item {
-        display: flex;
-        align-items: center;
         gap: 8px;
-        font-size: 0.875rem;
+        z-index: 50;
+    }
+    .led {
+        width: 10px;
+        height: 10px;
+        background: #333;
+    }
+    .led-green { background: #28C840; box-shadow: 0 0 5px #28C840; }
+    .led-yellow { background: #FEBC2E; box-shadow: 0 0 5px #FEBC2E; }
+    .led-red { background: #FF5E57; box-shadow: 0 0 5px #FF5E57; }
+
+    .blinking { animation: ledBlink 1.5s step-start infinite; }
+    @keyframes ledBlink { 50% { opacity: 0.3; box-shadow: none; } }
+
+    /* Performance Buttons */
+    .btn-physical-click {
+        background-color: #006BFF;
+        color: white;
+        padding: 14px 32px;
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: none;
+        box-shadow: 4px 4px 0 0 #000;
+        transition: all 0.1s;
+    }
+    .btn-physical-click:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 0 0 0 0 #000;
+        color: white;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .hero-section {
-            min-height: auto;
-            padding: 80px 0 100px;
-        }
+    .btn-physical-click-outline {
+        background-color: transparent;
+        color: white;
+        padding: 14px 32px;
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: 2px solid #1E293B;
+        box-shadow: 4px 4px 0 0 #000;
+        transition: all 0.1s;
+    }
+    .btn-physical-click-outline:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 0 0 0 0 #000;
+        border-color: #00FF88;
+        color: #00FF88;
+    }
 
-        .hero-badge {
-            margin-bottom: 20px;
-        }
-
-        .hero-headline {
-            margin-bottom: 20px;
-        }
-
-        .hero-description {
-            font-size: 1rem;
-            margin-bottom: 32px;
-        }
-
-        .hero-actions {
-            flex-direction: column;
-            margin-bottom: 40px;
-        }
-
-        .hero-btn-primary,
-        .hero-btn-secondary {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .hero-trust {
-            flex-direction: column;
-            gap: 12px;
-        }
+    @media (max-width: 991px) {
+        .display-2 { font-size: 3rem; }
+        .hero-title-main { font-size: 4rem; }
     }
 </style>
